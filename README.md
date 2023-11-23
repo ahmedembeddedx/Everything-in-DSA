@@ -12,8 +12,7 @@ Welcome to the Data Structures and Algorithms (DSA) Beginner to Professional rep
 
 - **Projects and Challenges**: Apply your knowledge by working on real-world projects and challenges. Test your problem-solving skills and gain practical experience that will set you apart in interviews and real-world scenarios.
 
-- **Contributions Welcome**: This repository is a community effort. If you find a bug, want to add new content, or improve existing ones, we welcome your contributions! Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started.
-
+- **Contributions Welcome**: This repository is a community effort. If you find a bug, want to add new content, or improve existing ones, we welcome your contributions!
 ## Getting Started
 
 1. Clone this repository to your local machine:
@@ -34,11 +33,7 @@ Before diving into the content, make sure you have a basic understanding of prog
 
 ## How to Contribute
 
-We appreciate your contributions! If you have improvements or additional content to share, please follow our [Contribution Guidelines](CONTRIBUTING.md).
-
-## Support and Community
-
-Join our community to connect with fellow learners, ask questions, and share your achievements. We have a [Discord server](#) where you can interact with like-minded individuals and seek help.
+We appreciate your contributions! If you have improvements or additional content to share, just make a pull request and submit.
 
 ## License
 
