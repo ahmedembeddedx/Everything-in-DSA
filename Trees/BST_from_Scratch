@@ -50,7 +50,7 @@ class BST
 		newNode->right = deepcopy(curr->right);
 		return newNode;
 	}
-	bool insert(int v,  Node*& curr)
+	bool insert(int v, Node*& curr)
 	{
 		if (curr == nullptr)
 		{
@@ -62,6 +62,24 @@ class BST
 		else if (v > curr->data)
 			return insert(v, curr->right);
 		return false;
+	}
+	void printFirstRight(Node* curr, int level)
+	{
+		if (curr == nullptr)
+			return;
+		if (level == 1)
+			cout << curr->data << " ";
+		else if (level > 1) 
+			printFirstRight(curr->right, level - 1);
+	}
+	void printFirstLeft(Node* curr, int level)
+	{
+		if (curr == nullptr)
+			return;
+		if (level == 1)
+			cout << curr->data << " ";
+		else if (level > 1)
+			printFirstLeft(curr->left, level - 1);
 	}
 
 public:
@@ -117,7 +135,7 @@ public:
 	{
 		if (i == 0)
 			curr = root;
-		return (curr == nullptr)? 0:countNodes(1, curr->left) + countNodes(1, curr->right) + 1;
+		return (curr == nullptr) ? 0 : countNodes(1, curr->left) + countNodes(1, curr->right) + 1;
 	}
 	int leafCount(int i = 0, Node* curr = nullptr)
 	{
@@ -136,6 +154,23 @@ public:
 		destroy(curr->left);
 		destroy(curr->right);
 		delete curr;
+	}
+
+
+
+	void print_side_view(int i = 0, Node* curr = nullptr)
+	{
+		if (root == nullptr)
+			return;
+		int h = getHeight(root);
+
+		for (int i = 1; i <= h; i++)
+		{
+			printFirstLeft(root, i);
+			cout << "\t";
+			printFirstRight(root, i);
+			cout << endl;
+		}
 	}
 	~BST()
 	{
@@ -161,6 +196,13 @@ int main()
 	cout << "Inserted 3" << endl;
 	tree.insert(7);
 	cout << "Inserted 7" << endl;
+	tree.insert(17);
+	cout << "Inserted 17" << endl;
+	tree.insert(20);
+	cout << "Inserted 20" << endl;
+	tree.insert(25);
+	cout << "Inserted 25" << endl;
+
 
 	cout << "Inorder Traversal: ";
 	tree.inorderPrint();
@@ -176,9 +218,10 @@ int main()
 
 	cout << "Level Order Traversal:" << endl;
 	tree.levelorderPrint();
+	cout << "\nSide View" << endl;
 
+	tree.print_side_view();
 	cout << "Destroying BST..." << endl;
 
 	return 0;
 }
-
