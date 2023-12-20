@@ -29,18 +29,6 @@ class BST
 		int right = getHeight(node->right);
 		return max(left, right) + 1;
 	}
-	void printLevel(Node* curr, int level)
-	{
-		if (curr == nullptr)
-			return;
-		if (level == 1)
-			cout << curr->data << " ";
-		else if (level > 1)
-		{
-			printLevel(curr->left, level - 1);
-			printLevel(curr->right, level - 1);
-		}
-	}
 	Node* deepcopy(Node* curr)
 	{
 		if (curr == nullptr)
@@ -91,6 +79,18 @@ public:
 	{
 		root = deepcopy(other.root);
 	}
+	void printLevel(Node* curr, int level)
+	{
+		if (curr == nullptr)
+			return;
+		if (level == 1)
+			cout << curr->data << " ";
+		else if (level > 1)
+		{
+			printLevel(curr->left, level - 1);
+			printLevel(curr->right, level - 1);
+		}
+	}
 	void levelorderPrint()
 	{
 		if (root == nullptr)
@@ -118,6 +118,28 @@ public:
 		cout << curr->data << " ";
 		inorderPrint(1, curr->right);
 	}
+	void preorderPrint(int i = 0, Node* curr = nullptr)
+	{
+		if (i == 0)
+			curr = root;
+		if (curr == nullptr)
+			return;
+		cout << curr->data << " ";
+		preorderPrint(1, curr->left);
+		preorderPrint(1, curr->right);
+	}
+	void postorderPrint(int i = 0, Node* curr = nullptr)
+	{
+		if (i == 0)
+			curr = root;
+		if (curr == nullptr)
+			return;
+		postorderPrint(1, curr->left);
+		postorderPrint(1, curr->right);
+		cout << curr->data << " ";
+	}
+
+
 	Node* search(int key, int i = 0, Node* curr = nullptr)
 	{
 		if (i == 0)
