@@ -157,11 +157,64 @@ private:
 			printAllPaths(curr->right, path);
 		}
 	}
+	Node<T>* deleteNode(T key, Node<T>* curr) {
+		if (curr == NULL)
+			return curr;
 
+		if (key < curr->key)
+			curr->left = deleteNode(key, curr->left);
+		else if (key > curr->key)
+			curr->right = deleteNode(key, curr->right);
+		else {
+			if (curr->left == NULL) {
+				Node<T>* temp = curr->right;
+				delete curr;
+				return temp;
+			}
+			else if (curr->right == NULL) {
+				Node<T>* temp = curr->left;
+				delete curr;
+				return temp;
+			}
+
+			Node<T>* temp = min(curr->right);
+
+			curr->key = temp->key;
+
+			curr->right = deleteNode(temp->key, curr->right);
+		}
+
+		curr->height = 1 + max(avlHeight(curr->left), avlHeight(curr->right));
+
+		int balance = getBalance(curr);
+
+		if (balance > 1) {
+			if (getBalance(curr->left) >= 0)
+				return SingleRightRotation(curr);
+			else {
+				curr->left = SingleLeftRotation(curr->left);
+				return SingleRightRotation(curr);
+			}
+		}
+		else if (balance < -1) {
+			if (getBalance(curr->right) <= 0)
+				return SingleLeftRotation(curr);
+			else {
+				curr->right = SingleRightRotation(curr->right);
+				return SingleLeftRotation(curr);
+			}
+		}
+
+		return curr;
+	}
 public:
 	AVL() 
 	{
 		root = NULL;
+	}
+	void remove(T key) 
+	{
+		root = deleteNode(key, root);
 	}
 	void insert(T data) 
 	{
