@@ -93,8 +93,8 @@ class BST
 		Node* newNode = new Node(arr[index]);
 		index++;
 
-		newNode->left = preordertoBST(arr, index, minValue, newNode->data, size);
-		newNode->right = preordertoBST(arr, index, newNode->data, maxValue, size);
+		newNode->left = preordertoBST(arr, index, minValue, newNode->data + 1, size);
+		newNode->right = preordertoBST(arr, index, newNode->data - 1, maxValue, size);
 
 		return newNode;
 	}
@@ -162,7 +162,7 @@ public:
 	{
 		root = deepcopy(other.root);
 	}
-	
+
 	void printLevel(Node* curr, int level)
 	{
 		if (curr == nullptr)
@@ -263,18 +263,18 @@ public:
 	}
 	void inordertoBST(int arr[], int size)
 	{
-		sort(arr, arr+size);
+		sort(arr, arr + size);
 		root = inordertoBST(arr, 0, size - 1);
 	}
 	void preordertoBST(int arr[], int size)
 	{
 		int index = 0;
-		root = preordertoBST(arr, index, -(INFINITY), INFINITY, size);
+		root = preordertoBST(arr, index, (INT_MIN), INT_MAX, size);
 	}
 	void postordertoBST(int arr[], int size)
 	{
 		int index = size - 1;
-		root = postordertoBST(arr, index, -(INFINITY), INFINITY, size);
+		root = postordertoBST(arr, index, INT_MIN, INT_MAX, size);
 	}
 	void print_side_view(int i = 0, Node* curr = nullptr)
 	{
@@ -299,47 +299,20 @@ public:
 
 int main()
 {
-	BST tree;
-
-	cout << "Creating BST..." << endl;
-
-	cout << "Inserting values into the BST:" << endl;
-	tree.insert(10);
-	cout << "Inserted 10" << endl;
-	tree.insert(5);
-	cout << "Inserted 5" << endl;
-	tree.insert(15);
-	cout << "Inserted 15" << endl;
-	tree.insert(3);
-	cout << "Inserted 3" << endl;
-	tree.insert(7);
-	cout << "Inserted 7" << endl;
-	tree.insert(17);
-	cout << "Inserted 17" << endl;
-	tree.insert(20);
-	cout << "Inserted 20" << endl;
-	tree.insert(25);
-	cout << "Inserted 25" << endl;
-
-
-	cout << "Inorder Traversal: ";
-	tree.inorderPrint();
+	BST tree1;
+	int arr1[] = { 1, 2, 3, 4, 5, 6, 7 };
+	tree1.inordertoBST(arr1, 7);
+	tree1.inorderPrint();
+	cout << endl;
+	BST tree2;
+	int arr2[] = { 7, 3, 1, 2, 8, 6, 9 };
+	tree2.preordertoBST(arr2, 7);
+	tree2.preorderPrint();
 	cout << endl;
 
-	int keyToSearch = 15;
-	Node* foundNode = tree.search(keyToSearch);
+	BST tree3;
+	int arr3[] = { 1, 2, 3, 6, 9, 8, 7 };
+	tree3.postordertoBST(arr3, 7);
+	tree3.postorderPrint();
 
-	if (foundNode != nullptr)
-		cout << "Found node with key " << keyToSearch << ": " << foundNode->data << endl;
-	else
-		cout << "Node with key " << keyToSearch << " not found." << endl;
-
-	cout << "Level Order Traversal:" << endl;
-	tree.levelorderPrint();
-	cout << "\nSide View" << endl;
-
-	tree.print_side_view();
-	cout << "Destroying BST..." << endl;
-
-	return 0;
 }
