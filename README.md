@@ -1,5 +1,7 @@
 # Welcome to the DSA Journey!
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ahmedembeddedx/Everything_but_DSA/blob/main/LICENSE)
+
 ## Overview
 
 Welcome to the Data Structures and Algorithms (DSA) Beginner to Professional repository! Whether you're just starting your journey in the world of coding or looking to enhance your problem-solving skills, you're in the right place. This repository aims to guide you through the fundamentals of DSA, gradually building up your skills to a professional level.
