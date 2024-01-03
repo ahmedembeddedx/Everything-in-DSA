@@ -1,0 +1,64 @@
+#include <iostream>
+#include <list>
+#include <stack>
+#include <queue>
+#include <vector>
+using namespace std;
+
+void heapifyup(int arr[], int size, int i)
+{
+	while (i > 0)
+	{
+		int parent = (i - 1) / 2;
+		if (arr[i] < arr[parent])
+		{
+			swap(arr[i], arr[parent]);
+			i = parent;
+		}
+		else
+			break;
+	}
+}
+void heapifydown(int arr[], int size, int i)
+{
+	while (true)
+	{
+		int left_child = 2 * i + 1;
+		int right_child = 2 * i + 2;
+		int smallest = i;
+
+		if (left_child < size && arr[left_child] < arr[smallest])
+			smallest = left_child;
+		if (right_child < size && arr[right_child] < arr[smallest])
+			smallest = right_child;
+		if (smallest != i)
+		{
+			swap(arr[i], arr[smallest]);
+			i = smallest;
+		}
+		else
+			break;
+	}
+}
+void BSTtoHeap(int arr[], int size)
+{
+	int min_index = 0;
+	
+	for (int i = 0; i < size; i++)
+		if (arr[i] < arr[min_index])
+			min_index = i;
+
+	heapifyup(arr, size, min_index);
+
+	for (int i = 0; i < size; i++)
+		heapifydown(arr, size, i);
+}
+
+int main()
+{
+	int arr[] = { 5, 3, 8, 2, 4, 6, 10 };
+	BSTtoHeap(arr, 7);
+	for (int i = 0; i < 7; i++)
+		cout << arr[i] << " ";
+	
+}
