@@ -1,0 +1,27 @@
+void levelordertraversal()
+{
+	queue<Node*> order;
+	Node* curr = root;
+	order.push(curr);
+
+	int row = 0;
+	int counts = 0;
+	while (!order.empty())
+	{
+		Node* parent = order.front();
+		if (parent != nullptr)
+		{
+			cout << parent->data << " ";
+			order.push(parent->left);
+			order.push(parent->right);
+		}
+		order.pop();
+		counts++;
+		if (counts == pow(2, row))
+		{
+			cout << endl;
+			row++;
+			counts = 0;
+		}
+	}
+}
